@@ -49,9 +49,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c0e2eede97689b744a12800995e83f14, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1e4725a2c90907b48aeeedee2cd9ae8d, type: 2}
+      objectReference: {fileID: 2100000, guid: e8629655be5605841bd3a4b0a723c26f, type: 2}
     - target: {fileID: 919132149155446097, guid: c0e2eede97689b744a12800995e83f14, type: 3}
       propertyPath: m_Name
       value: Clay Jar
@@ -59,5 +59,80 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e2eede97689b744a12800995e83f14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 70649337759641785}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e2eede97689b744a12800995e83f14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2988973827306463517}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e2eede97689b744a12800995e83f14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6996086029106856544}
   m_SourcePrefab: {fileID: 100100000, guid: c0e2eede97689b744a12800995e83f14, type: 3}
+--- !u!1 &8181098449977157587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e2eede97689b744a12800995e83f14, type: 3}
+  m_PrefabInstance: {fileID: 9027589010740877954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &70649337759641785
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8181098449977157587}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!65 &2988973827306463517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8181098449977157587}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.73379374, y: 0.67669773, z: 0.72439355}
+  m_Center: {x: 0.004698977, y: 0.33798802, z: 0.0012206137}
+--- !u!114 &6996086029106856544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8181098449977157587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84c5f3b0e492c944984f5c409078677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BreakableObject
+  brokenPrefab: {fileID: 3964954067609763539, guid: c1fb9366b5327d042a4c0000516f8be9, type: 3}
