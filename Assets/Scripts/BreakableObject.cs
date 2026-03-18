@@ -38,8 +38,12 @@ public class BreakableObject : MonoBehaviour
             isBroken = true;
 
             if (brokenPrefab != null)
+            {
+                //GameObject broken = 
                 Instantiate(brokenPrefab, transform.position, transform.rotation);
 
+                //broken.transform.localScale = transform.localScale;
+            }
             Destroy(gameObject);
         }
     }
