@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text winMessageText;           // Shows "YOU WIN!" 
     public GameObject gameOverPanel;           // Panel with replay button
     public Button replayButton;
+    public Button backToMenu;
 
     private float timer;
     private bool gameActive = true;
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
         if (!gameActive || gameEnded) return;
 
         _brokenProgress--;
-        int bonus = Random.Range(1,11);
+        int bonus = Random.Range(1,6);
         timer += bonus;
         UpdateUI();
         // Check win condition for ClearAll mode
@@ -148,6 +150,11 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         Cursor.visible = false;
+    }
+    // back to main menu
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Helper for BreakableObject to check if game is active
