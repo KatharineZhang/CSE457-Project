@@ -38,7 +38,10 @@ public class BreakableObject : MonoBehaviour
             if (brokenPrefab != null)
                 Instantiate(brokenPrefab, transform.position, transform.rotation);
 
-            GameManager.Instance.ObjectBroken(this);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.ObjectBroken(this);
+            }
             Destroy(gameObject);
         }
     }

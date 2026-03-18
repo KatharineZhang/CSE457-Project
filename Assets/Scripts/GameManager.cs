@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
     {
         gameActive = false;
         gameEnded = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         if (winMessageText != null)
             winMessageText.text = "YOU WIN!";
@@ -100,6 +102,8 @@ public class GameManager : MonoBehaviour
     {
         gameActive = false;
         gameEnded = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         if (winMessageText != null)
             winMessageText.text = "TIME'S UP!";

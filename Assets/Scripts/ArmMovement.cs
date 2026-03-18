@@ -245,6 +245,10 @@ namespace StarterAssets
             //    Destroy(other.gameObject);
             //}
             BreakableObject breakable = other.GetComponent<BreakableObject>();
+            if (breakable == null)
+            {
+                breakable = other.GetComponentInParent<BreakableObject>();
+            }
 
             if (breakable != null)
             {
