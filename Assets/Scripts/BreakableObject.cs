@@ -7,9 +7,7 @@ public class BreakableObject : MonoBehaviour
 
     private void Start()
     {
-        // Register this object with the GameManager at start
-        if (GameManager.Instance != null)
-            GameManager.Instance.RegisterBreakable(this);
+        // nothing needed currently
     }
 
     private void OnDestroy()
@@ -40,6 +38,7 @@ public class BreakableObject : MonoBehaviour
             if (brokenPrefab != null)
                 Instantiate(brokenPrefab, transform.position, transform.rotation);
 
+            GameManager.Instance.ObjectBroken(this);
             Destroy(gameObject);
         }
     }

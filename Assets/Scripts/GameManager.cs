@@ -6,10 +6,9 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    [Header("Game Mode")]
-    public bool useTimedMode = false;       // If false, ClearAll mode
-    public float timeLimit = 60f;            // Seconds (only for Timed mode)
+    public float timeLimit = 10f;            // Seconds (only for Timed mode)
+    public int _brokenProgress;
+    public int _breakableCount;
 
     [Header("UI References")]
     public TMP_Text brokenCountText;         // Shows "Broken: X / Y"
@@ -18,8 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;           // Panel with replay button
     public Button replayButton;
 
-    private List<BreakableObject> allBreakables = new List<BreakableObject>();
-    private int brokenCount = 0;
     private float timer;
     private bool gameActive = true;
     private bool gameEnded = false;
@@ -39,18 +36,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Find all breakable objects in the scene (in case they didn't register in time)
-        BreakableObject[] found = FindObjectsOfType<BreakableObject>();
-        foreach (var b in found)
-        {
-            if (!allBreakables.Contains(b))
-                allBreakables.Add(b);
-        }
+        _breakableCount = FindObjectsByType<BreakableObject>(FindObjectsSortMode.None).Length;
+        _brokenProgress = _breakableCount;
 
         // Initialize timer
         timer = timeLimit;
         UpdateUI();
-
-
     }
 
     private void Update()
@@ -58,22 +49,12 @@ public class GameManager : MonoBehaviour
         if (!gameActive || gameEnded) return;
 
         // Timed mode countdown
-        if (useTimedMode)
+        timer -= Time.deltaTime;
+        if (timer <= 0)
         {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                timer = 0;
-                EndGame();
-            }
-            UpdateUI();
+            timer = 0;
+            EndGame();
         }
-    }
-
-    public void RegisterBreakable(BreakableObject obj)
-    {
-        if (!allBreakables.Contains(obj))
-            allBreakables.Add(obj);
         UpdateUI();
     }
 
@@ -81,11 +62,12 @@ public class GameManager : MonoBehaviour
     {
         if (!gameActive || gameEnded) return;
 
-        brokenCount++;
+        _brokenProgress--;
+        int bonus = Random.Range(1,11);
+        timer += bonus;
         UpdateUI();
-
         // Check win condition for ClearAll mode
-        if (!useTimedMode && brokenCount >= allBreakables.Count)
+        if (_brokenProgress <= 0)
         {
             WinGame();
         }
@@ -97,13 +79,10 @@ public class GameManager : MonoBehaviour
         gameEnded = true;
 
         // Determine win/loss in Timed mode
-        if (useTimedMode)
-        {
-            if (brokenCount >= allBreakables.Count)
-                WinGame();
-            else
-                LoseGame();
-        }
+        if (_brokenProgress <= 0)
+            WinGame();
+        else
+            LoseGame();
     }
 
     private void WinGame()
@@ -115,8 +94,6 @@ public class GameManager : MonoBehaviour
             winMessageText.text = "YOU WIN!";
 
         ShowGameOverPanel();
-
-
     }
 
     private void LoseGame()
@@ -139,11 +116,11 @@ public class GameManager : MonoBehaviour
     private void UpdateUI()
     {
         if (brokenCountText != null)
-            brokenCountText.text = $"Broken: {brokenCount} / {allBreakables.Count}";
+            brokenCountText.text = $"Remaining: {_brokenProgress}";
 
         if (timerText != null)
         {
-            if (useTimedMode && gameActive)
+            if (gameActive)
             {
                 int minutes = Mathf.FloorToInt(timer / 60f);
                 int seconds = Mathf.FloorToInt(timer % 60f);
@@ -159,7 +136,7 @@ public class GameManager : MonoBehaviour
     // Called by the replay button
     public void Replay()
     {
-        // Reload the current scene – this resets all objects to their initial positions,
+        // Reload the current scene ï¿½ this resets all objects to their initial positions,
         // effectively "repopulating" the breakable objects.
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(
