@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        Cursor.visible = false;
     }
 
     // Helper for BreakableObject to check if game is active
