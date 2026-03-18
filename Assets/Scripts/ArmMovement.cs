@@ -240,9 +240,15 @@ namespace StarterAssets
             // and happens to collide with a breakable object
             if (!isSwinging(isLeftArm)) return;
             Debug.Log("Hit: " + other.gameObject.name);
-            if(other.gameObject.CompareTag("Breakable"))
+            //if(other.gameObject.CompareTag("Breakable"))
+            //{
+            //    Destroy(other.gameObject);
+            //}
+            BreakableObject breakable = other.GetComponent<BreakableObject>();
+
+            if (breakable != null)
             {
-                Destroy(other.gameObject);
+                breakable.Break();
             }
         }
         // public accessors
