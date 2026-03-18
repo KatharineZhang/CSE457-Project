@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
         // Find all breakable objects in the scene (in case they didn't register in time)
         _breakableCount = FindObjectsByType<BreakableObject>(FindObjectsSortMode.None).Length;
         _brokenProgress = _breakableCount;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         // Initialize timer
         timer = timeLimit;
